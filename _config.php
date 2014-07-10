@@ -1,3 +1,3 @@
 <?php 
 
-DevelopmentAdmin::registerAction('DevLogsController', 'logs', 'Error logs');
+DevelopmentAdmin::registerAction('ErrorLogsController', 'logs', 'Error logs');
