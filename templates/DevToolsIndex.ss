@@ -1,7 +1,7 @@
 <ul>
-	<li><a href="triggerUserWarning">triggerUserWarning</a></li>
-	<li><a href="triggerUserError">triggerUserError</a></li>
-	<li><a href="triggerException">triggerException</a></li>
+	<li><a href="tools/triggerUserWarning">triggerUserWarning</a></li>
+	<li><a href="tools/triggerUserError">triggerUserError</a></li>
+	<li><a href="tools/triggerException">triggerException</a></li>
 	
 	
 	
