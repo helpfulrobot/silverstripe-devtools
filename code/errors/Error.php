@@ -6,17 +6,25 @@
 class Error extends DataObject {
 
 	private static $db = array(
-		'Hash' 				=> 'Text',
-		'Message' 			=> 'Text', 	//
-		'Stack' 			=> 'Text', 	// These four are copies of the first ErrorOccurance
-		'File' 				=> 'Text', 	// recorded for this error, for performance.
-		'Line' 				=> 'Text', 	// 
-		'LatestOccurance' 	=> 'SS_DateTime',
-		'NumOccurances' 	=> 'Int'
+		'Hash' 	=> 'Text',
 	);
 
 	public static function generateHash($file, $line){
 		return md5($file . '-' . $line);
+	}
+	
+	/**
+	 * @return ErrorOccurance
+	 */
+	public function LatestOccurance(){
+		return ErrorOccurance::get()->filter('Hash', $this->Hash)->sort('Created', 'DESC')->limit(1)->first();
+	}
+	
+	/**
+	 * @return int
+	 */
+	public function NumOccurances(){
+		return ErrorOccurance::get()->filter('Hash', $this->Hash)->count();
 	}
 
 }

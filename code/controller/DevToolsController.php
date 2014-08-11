@@ -16,6 +16,13 @@ class DevToolsController extends Controller {
 		'triggerException',
 	);
 	
+	public function init(){
+		parent::init();
+		$renderer = new DebugView();
+		$renderer->writeHeader();
+		$renderer->writeInfo("SilverStripe Development Tools: Logs", Director::absoluteBaseURL());
+	}
+	
 	public function index() {
 		echo SSViewer::execute_template('DevToolsIndex', null);
 	}

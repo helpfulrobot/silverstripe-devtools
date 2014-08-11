@@ -9,6 +9,9 @@ class ErrorOccurance extends DataObject {
 		'File' => 'Text',
 		'Line' => 'Text',
 		'Data' => 'Text',
+		'IP' => 'Text',
+		'RequestMethod' => 'Text',
+		'RequestURI' => 'Text',
 	);
 	
 	/**

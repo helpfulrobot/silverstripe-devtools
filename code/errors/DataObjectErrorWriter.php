@@ -14,7 +14,7 @@ class DataObjectErrorWriter extends Zend_Log_Writer_Abstract {
 		$message = $event['message']['errstr'];
 		$data = print_r($event, true);
 		$stack = '';
-		foreach($event['message']['errorcontext'] as $stackPart){
+		foreach($event['message']['errcontext'] as $stackPart){
 			if(isset($stackPart['file']) && isset($stackPart['line'])){
 				$stack .= $stackPart['file'] . '#' . $stackPart['line'] . PHP_EOL;
 			}
@@ -27,18 +27,10 @@ class DataObjectErrorWriter extends Zend_Log_Writer_Abstract {
 		$error = Error::get()->filter('Hash', $hash)->limit(1);
 		if($error->exists()){
 			$error = $error->first();
-			$error->NumOccurances++;
-			$error->LatestOccurance = SS_Datetime::now();
 			$error->write();
 		}else{
 			$error = new Error();
 			$error->Hash = $hash;
-			$error->Message = $message;
-			$error->Stack = $stack;
-			$error->File = $file;
-			$error->Line = $line;
-			$error->NumOccurances = 1;
-			$error->LatestOccurance = SS_Datetime::now();
 			$error->write();
 		}
 		
@@ -49,6 +41,9 @@ class DataObjectErrorWriter extends Zend_Log_Writer_Abstract {
 		$errorOccurance->Stack = $stack;
 		$errorOccurance->File = $file;
 		$errorOccurance->Line = $line;
+		$errorOccurance->IP = $_SERVER['REMOTE_ADDR'];
+		$errorOccurance->RequestMethod = $_SERVER['REQUEST_METHOD'];
+		$errorOccurance->RequestURI = $_SERVER['REQUEST_URI'];
 		$errorOccurance->Data = $data;
 		$errorOccurance->write();
 	}
