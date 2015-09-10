@@ -1,6 +1,6 @@
 <div id="content">
 
-<h2>Page Types</h2>
+<h2>Page Typesz</h2>
 
 <?php foreach($data['PageTypeData'] as $i => $p){ ?>
 	
